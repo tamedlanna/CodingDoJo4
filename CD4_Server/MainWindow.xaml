@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CD4_Server"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Server" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="Start" Height="25" Width="50" Margin="10"></Button>
+            <Button Content="Stop" Height="25" Width="50"></Button>
+        </StackPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Chat" Height="20">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="212.5"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="170"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Connected Users: " VerticalAlignment="Center" Grid.Column="0"></Label>
+                    
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="Received Messages: " VerticalAlignment="Center" ></Label>
+                        <Label VerticalAlignment="Center" Height="20"></Label>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1" ></ListBox>
+                    <Button Grid.Row="2" Width="50" Content="Drop" HorizontalAlignment="Right"></Button>
+                    <ListBox  Grid.Column="1" Grid.Row="1" ></ListBox>
+                    <Button Grid.Column="1" Grid.Row="2" Width="250" Content="Save to Log" HorizontalAlignment="Center"></Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Logs" Height="20"></TabItem>
+        </TabControl>
+
+       
+    
     </Grid>
 </Window>
