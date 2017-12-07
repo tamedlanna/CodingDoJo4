@@ -13,7 +13,12 @@ namespace CodingDoJo4.ViewModel
         private Client clientcom;
         private bool isConnected = false;
 
-       
+        public string ChatName { get;  set; }
+        public string Message { get; set; }
+        public ObservableCollection<string> ReceivedMessages { get; set; }
+
+        public RelayCommand ConnectBtnClickCmd { get; set; }
+        public RelayCommand SendBtnClickCmd { get; set; }
 
         public MainViewModel()
         {

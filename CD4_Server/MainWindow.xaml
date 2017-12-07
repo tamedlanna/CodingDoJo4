@@ -4,18 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CD4_Server"
+        xmlns:ViewModel="clr-namespace:CD4_Server.ViewModel"
         mc:Ignorable="d"
         Title="Server" Height="350" Width="525">
+    <Window.DataContext>
+        <ViewModel:MainViewModel/>
+    </Window.DataContext>
 
-   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Content="Start" Height="25" Width="50" Margin="10"></Button>
-            <Button Content="Stop" Height="25" Width="50"></Button>
+            <Button Content="Start" Height="25" Width="50" Margin="10" Command="{Binding StartBtnClickCmd}"></Button>
+            <Button Content="Stop" Height="25" Width="50" Command="{Binding StopBtnClickCmd}"></Button>
         </StackPanel>
 
         <TabControl Grid.Row="1">
@@ -36,12 +39,12 @@
                     
                     <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
                     <Label Content="Received Messages: " VerticalAlignment="Center" ></Label>
-                        <Label VerticalAlignment="Center" Height="20"></Label>
+                        <Label VerticalAlignment="Center" Height="20" Content="{Binding NoOfReceivedMessages, Mode=OneWay}"></Label>
                     </StackPanel>
 
-                    <ListBox Grid.Row="1" ></ListBox>
-                    <Button Grid.Row="2" Width="50" Content="Drop" HorizontalAlignment="Right"></Button>
-                    <ListBox  Grid.Column="1" Grid.Row="1" ></ListBox>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" ></ListBox>
+                    <Button Grid.Row="2" Width="50" Content="{Binding DropClientBtnClickCmd}" HorizontalAlignment="Right"></Button>
+                    <ListBox  Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Messages}" ></ListBox>
                     <Button Grid.Column="1" Grid.Row="2" Width="250" Content="Save to Log" HorizontalAlignment="Center"></Button>
                 </Grid>
             </TabItem>

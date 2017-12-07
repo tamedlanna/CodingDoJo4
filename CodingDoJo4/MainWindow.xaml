@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingDoJo4"
+        xmlns:ViewModel="clr-namespace:CodingDoJo4.ViewModel"
         mc:Ignorable="d"
         Title="Chat Client" Height="350" Width="525">
-    
+    <Window.DataContext>
+        <ViewModel:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -21,13 +24,13 @@
                 <ColumnDefinition Width="262.5"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-            <Label Content="Chat Name: " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Height="20" Width="100"></TextBox>
+            <Label Content="Chat Name: " HorizontalAlignment="Center" VerticalAlignment="Center" ></Label>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Height="20" Width="100" Text="{Binding ChatName}" ></TextBox>
             
         </StackPanel>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Grid.Row="0">
-            <Button Content="Connect" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="25" Width="50"></Button>
+            <Button Content="Connect" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="25" Width="50" Command="{Binding ConnectBtnClickCmd}"></Button>
         </StackPanel>
         </Grid>
         
@@ -42,12 +45,12 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
             <Label Content="Message: " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Height="20" Width="150"></TextBox>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Height="20" Width="150" Text="{Binding Message}"></TextBox>
 
         </StackPanel>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Grid.Row="3">
-            <Button Content="Send" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="25" Width="100"></Button>
+            <Button Content="Send" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="25" Width="100" Command="{Binding SendBtnClickCmd}"></Button>
         </StackPanel>
         </Grid>
     </Grid>

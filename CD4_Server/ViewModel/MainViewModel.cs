@@ -15,6 +15,22 @@ namespace CD4_Server.ViewModel
         private const string ip = "127.0.0.1";
         private bool isConnected = false;
 
+        public RelayCommand StartBtnClickCmd { get; set; }
+        public RelayCommand StopBtnClickCmd { get; set; }
+        public ObservableCollection<string> Users { get; set; }
+        public ObservableCollection<string> Messages { get; set; }
+        public string SelectedUser { get; set; }
+
+        public RelayCommand DropClientBtnClickCmd { get; set; }
+
+        public int NoOfReceivedMessages
+        {
+            get
+            {
+                return Messages.Count;
+            }
+        }
+
         public MainViewModel()
         {
             ObservableCollection<string> Messages = new ObservableCollection<string>();
@@ -28,28 +44,45 @@ namespace CD4_Server.ViewModel
                                isConnected = true;
                            },
                            () => { return !isConnected; });
-
-
-            StopBtnClickCmd = new RelayCommand(
-                //action for execute
-                () =>
-                {
-                    server.StopAccepting();
-                    isConnected = false;
-                },
-                //can execute
-                () => { return isConnected; });
-
-
-            DropClientBtnClickCmd = new RelayCommand(() =>
-            {
-                server.DisconnectSpecificClient(SelectedUser);
-                Users.Remove(SelectedUser); // remove from GUI listbox
+            RelayCommand StopBtnClickCmd = new RelayCommand(
+                            //action for execute
+                            () =>
+                            {
+                                server.StopAccepting();
+                                isConnected = false;
+                            },
+                            //can execute
+                            () => { return isConnected; });
+            RelayCommand DropClientBtnClickCmd = new RelayCommand(() =>
+             {
+                 string SelectedUser = null;
+                 server.DisconnectSpecificClient(SelectedUser);
+                 Users.Remove(SelectedUser); // remove from GUI listbox
             },
-                () => { return (SelectedUser != null); });
+                            () => { return (SelectedUser != null); });
+        }
+
+        public void UpdateGuiWithNewMessage(string message)
+        {
+            //switch thread to GUI thread to write to GUI
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                string name = message.Split(':')[0];
+                if (!Users.Contains(name))
+                {//not in list => add it
+                    Users.Add(name);
+                }
+                //write message
+                Messages.Add(message);
+                //do this to inform the GUI about the update of the received message counter!
+                RaisePropertyChanged("NoOfReceivedMessages");
+            });
+
 
 
         }
     }
+
+
 }
        
