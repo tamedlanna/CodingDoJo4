@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:CodingDoJo4"
         mc:Ignorable="d"
         Title="Chat Client" Height="350" Width="525">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
