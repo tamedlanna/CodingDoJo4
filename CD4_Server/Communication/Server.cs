@@ -15,7 +15,7 @@ namespace CD4_Server.Communication
         Socket serverSocket;
         List<ClientHandler> clients = new List<ClientHandler>();
         Action<string> GuiUpdater;
-        Thread acceptingThread; //handles the accepting of new clients
+        Thread acceptingThread; //behandelt die Annahme neuer Clients
 
         public Server(string ip, int port, Action<string> guiUpdater)
         {
@@ -42,7 +42,7 @@ namespace CD4_Server.Communication
                 }
                 catch (Exception e)
                 {
-                    //executed if serversocket.close is called
+                   
                 }
             }
         }
@@ -50,14 +50,13 @@ namespace CD4_Server.Communication
         public void StopAccepting()
         {
             serverSocket.Close();
-            acceptingThread.Abort(); //abort accepting thread
-            //close all client threads and connections
+            acceptingThread.Abort(); 
             foreach (var item in clients)
             {
                 item.Close();
             }
-            //remove all entries from the list
-            clients.Clear();
+          
+            clients.Clear();//alle Einträge werden gelöscht
 
         }
 
@@ -68,7 +67,7 @@ namespace CD4_Server.Communication
                 if (item.Name.Equals(name))
                 {
                     item.Close();
-                    clients.Remove(item); //remove Clienthandler object from list; that works only if we break the foreach after that operation
+                    clients.Remove(item);
                     break;
                 }
             }

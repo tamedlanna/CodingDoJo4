@@ -25,7 +25,10 @@ namespace CodingDoJo4.Connection
                 clientsocket = client.Client;
                 StartReceiving();
             }
-            catch { }
+            catch (Exception) {
+                messageInformer("Server not ready");
+                AbortInformer();
+            }
         }
 
         private void StartReceiving()
@@ -44,18 +47,18 @@ namespace CodingDoJo4.Connection
             Close();
         }
 
-        internal void Send(object p)
+        public void Send(object p)
         {
             throw new NotImplementedException();
         }
 
-        private void Close()
+        public void Close()
         {
             clientsocket.Close();
             AbortInformer();
         }
 
-        private void Send(string message) {
+        public void Send(string message) {
             if (clientsocket != null) {
                 clientsocket.Send(Encoding.UTF8.GetBytes(message));
             }

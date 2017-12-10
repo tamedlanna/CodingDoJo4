@@ -64,7 +64,7 @@ namespace CD4_Server.ViewModel
 
         public void UpdateGuiWithNewMessage(string message)
         {
-            //switch thread to GUI thread to write to GUI
+          
             App.Current.Dispatcher.Invoke(() =>
             {
                 string name = message.Split(':')[0];
@@ -72,9 +72,9 @@ namespace CD4_Server.ViewModel
                 {//not in list => add it
                     Users.Add(name);
                 }
-                //write message
+              
                 Messages.Add(message);
-                //do this to inform the GUI about the update of the received message counter!
+               
                 RaisePropertyChanged("NoOfReceivedMessages");
             });
 

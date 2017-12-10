@@ -18,8 +18,7 @@ namespace CD4_Server.Communication
         const string endMessage = "@quit";
 
 
-        private Socket socket;
-       
+      
         public object Name { get; private set; }
         public Socket Clientsocket { get; private set; }
 
@@ -48,12 +47,12 @@ namespace CD4_Server.Communication
             Close();
         }
 
-        internal void Send(string message)
+        public void Send(string message)
         {
             Clientsocket.Send(Encoding.UTF8.GetBytes(message));
         }
 
-        internal void Close()
+        public void Close()
         {
             Send(endMessage); 
             Clientsocket.Close(1); 
